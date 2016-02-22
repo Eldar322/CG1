@@ -1,6 +1,93 @@
-﻿var maxX = 95.047;
+﻿var limits = {
+    rgb: {
+        r: {
+            min: 0,
+            max: 255
+        },
+        g: {
+            min: 0,
+            max: 255
+        },
+        b: {
+            min: 0,
+            max: 255
+        }
+    },
+    hls: {
+        h: {
+            min: 0,
+            max: 1
+        },
+        l: {
+            min: 0,
+            max: 1
+        },
+        s: {
+            min: 0,
+            max: 1
+        }
+    },
+    lab: {
+        l: {
+            min: 0,
+            max: 100
+        },
+        a: {
+            min: -128,
+            max: 127
+        },
+        b: {
+            min: -128,
+            max: 127
+        }
+    },
+    cmy: {
+        c: {
+            min: 0,
+            max: 1
+        },
+        m: {
+            min: 0,
+            max: 1
+        },
+        y: {
+            min: 0,
+            max: 1
+        }
+    },
+    xyz: {
+        x: {
+            min: 0,
+            max: 95.047
+        },
+        y: {
+            min: 0,
+            max: 100.00
+        },
+        z: {
+            min: 0,
+            max: 108.883
+        }
+    }
+};
+
+var maxX = 95.047;
 var maxY = 100.000;
 var maxZ = 108.883;
+
+var check = function (color) {
+    for (var prop in color){
+        if (prop == 'type')
+            continue;
+
+        limit = limits[color.type][prop];
+        
+        if (color[prop] < limit.min || color[prop] > limit.max) {
+            color.msg = "Out of bound";
+        }
+    }
+    return color;
+};
 
 var toTemp = function (c) {
     var t;
@@ -32,12 +119,12 @@ var xyzToLab = function(xyz){
     y = toTemp(y);
     z = toTemp(z);
 
-    return {
+    return check( {
         type : 'lab',
         l : ( 116 * y ) - 16,
         a : 500 * ( x - y ),
         b: 200 * ( y - z )
-    };
+    });
 };
 
 var labToXYZ = function (lab) {
@@ -49,12 +136,12 @@ var labToXYZ = function (lab) {
     x = toTempReverse(x);
     z = toTempReverse(z);
 
-    return {
+    return check({
         type: 'xyz',
         x: maxX * x,
         y: maxY * y,
         z: maxZ * z
-    };
+    });
 };
 
 var toTempRGB = function (c) {
@@ -91,12 +178,12 @@ var xyzToRGB = function (xyz) {
     g = toTempRGB(g);
     b = toTempRGB(b);
 
-    return {
+    return check({
         type: 'rgb',
         r: r * 255,
         g: g * 255,
         b: b * 255
-    };
+    });
 };
 
 var rgbToXYZ = function (rgb) {
@@ -112,12 +199,12 @@ var rgbToXYZ = function (rgb) {
     g = g * 100;
     b = b * 100;
 
-    return {
+    return check({
         type: 'xyz',
         x: r * 0.4124 + g * 0.3576 + b * 0.1805,
         y: r * 0.2126 + g * 0.7152 + b * 0.0722,
         z: r * 0.0193 + g * 0.1192 + b * 0.9505
-    };
+    });
 };
 
 var rgbToCMY = function (rgb) {
@@ -181,14 +268,14 @@ var rgbToHLS = function (rgb) {
             h += 1;
         if (!equals(h, 1) && h > 1)
             h -= 1;
-
-        return {
-            type: 'hls',
-            h: h,
-            l: l,
-            s: s
-        }
     }
+
+    return check({
+        type: 'hls',
+        h: h,
+        l: l,
+        s: s
+    });
 }
 
 var hueToRGB = function (v1, v2, vH) {
@@ -229,12 +316,12 @@ var hlsToRGB = function (hls) {
         g = 255 * hueToRGB(tmp1, tmp2, hls.h);
         b = 255 * hueToRGB(tmp1, tmp2, hls.h - (1 / 3));
     }
-    return {
+    return check({
         type: 'rgb',
         r: r,
         g: g,
         b: b
-    };
+    });
 };
 
 var convert = function (color, to) {

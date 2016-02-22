@@ -1,18 +1,28 @@
-﻿var RGBChanging = false;
+﻿var msg = $('.alert');
+
+var RGBChanging = false;
 var RGBChange = function (data, color) {
     if (RGBChanging)
         return;
 
     RGBChanging = true;
 
+
     if (color != null) {
         rgb.r.setValue(color.r);
         rgb.g.setValue(color.g);
         rgb.b.setValue(color.b);
+        if (color.msg == null) {
+            msg.text("");
+        } else {
+            msg.text(color.msg);
+        }
         $('#RGBColor').css('background', 'rgb(' + rgb.r.getValue() + ',' + rgb.g.getValue() + ',' + rgb.b.getValue() + ')');
         RGBChanging = false;
         return;
     }
+
+    msg.text("");
 
     $('#RGBColor').css('background', 'rgb(' + rgb.r.getValue() + ',' + rgb.g.getValue() + ',' + rgb.b.getValue() + ')');
 
@@ -43,9 +53,16 @@ var HLSChange = function (data, color) {
         hls.h.setValue(color.h);
         hls.l.setValue(color.l);
         hls.s.setValue(color.s);
+        if (color.msg == null) {
+            msg.text("");
+        } else {
+            msg.text(color.msg);
+        }
         HLSChanging = false;
         return;
     }
+
+    msg.text("");
 
     var hlsColor = {
         type: 'hls',
@@ -108,6 +125,8 @@ var CMYChange = function (data, color) {
         CMYChanging = false;
         return;
     }
+
+    msg.text("");
 
     var cmyColor = {
         type: 'cmy',
@@ -216,3 +235,5 @@ var cmy = {
         }, tooltip: 'always'
     }).on('slide', CMYChange).data('slider')
 }
+
+RGBChange();

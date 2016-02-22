@@ -9,6 +9,10 @@
     padding-right: 15px;
 }
 
+.alert{
+    height: 50px;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -33,6 +37,6 @@ h2{
 }
 
 #RGBColor {
-	height: 30px;
+	height: 50px;
 	background: rgb(128, 128, 128);
 }
