@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <h2>RGB</h2>
+        <div class="slide">
+            <b>R</b><input class="slider RGB" data-slider-id="slider-tmp" id="RGB1" type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="128" />
+        </div>
+        <div class="slide">
+            <b>G</b><input class="slider RGB" data-slider-id="slider-tmp" id="RGB2" type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="128" />
+        </div>
+        <div class="slide">
+            <b>B</b><input class="slider RGB" data-slider-id="slider-tmp" id="RGB3" type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="128" />
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <h2>HLS</h2>
+        <div class="slide">
+            <b>H</b><input class="slider HLS" data-slider-id="slider-tmp" id="HLS1" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="180" />
+        </div>
+        <div class="slide">
+            <b>L</b><input class="slider HLS" data-slider-id="slider-tmp" id="HLS2" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" />
+        </div>
+        <div class="slide">
+            <b>S</b><input class="slider HLS" data-slider-id="slider-tmp" id="HLS3" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" />
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <h2>L*a*b</h2>
+        <div class="slide">
+            <b>L</b><input class="slider Lab" data-slider-id="slider-tmp" id="Lab1" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="0.1" data-slider-value="50" />
+        </div>
+        <div class="slide">
+            <b>a</b><input class="slider Lab" data-slider-id="slider-tmp" id="Lab2" type="text" data-slider-min="-128" data-slider-max="127" data-slider-step="1" data-slider-value="50" />
+        </div>
+        <div class="slide">
+            <b>b</b><input class="slider Lab" data-slider-id="slider-tmp" id="Lab3" type="text" data-slider-min="-128" data-slider-max="127" data-slider-step="1" data-slider-value="50" />
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <h2>CMY</h2>
+        <div class="slide">
+            <b>C</b><input class="slider CMY" data-slider-id="slider-tmp" id="CMY1" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" />
+        </div>
+        <div class="slide">
+            <b>M</b><input class="slider CMY" data-slider-id="slider-tmp" id="CMY2" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" />
+        </div>
+        <div class="slide">
+            <b>Y</b><input class="slider CMY" data-slider-id="slider-tmp" id="CMY3" type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.5" />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="row-md-12">
+        <div id="RGBColor"></div>
+    </div>
+</div>
